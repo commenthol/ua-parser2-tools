@@ -1,32 +1,38 @@
 {
   "name": "ua-parser2-tools",
   "description": "Development Tools for ua-parser2",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "main": "lib/main.js",
   "author": "commenthol",
   "maintainers": [
-    {
-      "name": "commenthol",
-      "email": "commenthol@gmail.de"
-    }
+    "commenthol <commenthol@gmail.de>"
   ],
   "contributors": [],
   "keywords": [
     "ua-parser2",
     "development",
     "tools"
-  ], 
+  ],
+  "bugs": {
+    "url": "https://github.com/commenthol/ua-parser2-tools/issues"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/commenthol/ua-parser2-tools.git"
   },
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.3.0"
+    "commander": "^2.3.0",
+    "js-yaml": "^3.2.3",
+    "streamss": "^0.1.1",
+    "yamlparser": "0.0.2"
   },
   "devDependencies": {
     "mocha": "*"
   },
   "scripts": {
-    "start": "node lib/util/download.js"
+    "start": "node lib/util/download.js",
+    "test": "mocha */test/*.mocha.js",
+    "lint": "jshint *.js lib/*.js"
   }
 }
