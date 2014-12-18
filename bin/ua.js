@@ -6,4 +6,4 @@
  * debug ua_parser regular expressions
  */
 
-require('./lib/main').os();
+require('../lib/main').ua();

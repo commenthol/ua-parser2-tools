@@ -13,7 +13,7 @@
  * Module dependencies
  */
 var 
-  config = require('./config'),
+  config = require('../config'),
   fs     = require('fs'),
   path   = require('path');  
 

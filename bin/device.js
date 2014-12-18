@@ -6,4 +6,4 @@
  * debug ua_parser regular expressions
  */
 
-require('./lib/main').engine();
+require('../lib/main').device();
