@@ -19,7 +19,8 @@ To detect the matching parsing line in the `regexes.yaml`, debug information can
 * [2\. Files to generate lists and add test cases](#2-files-to-generate-lists-and-add-test-cases)
 * [3\. Installation](#3-installation)
 * [4\. Development Process](#4-development-process)
-* [5\. License](#5-license)
+* [5\. Special Tools](#5-special-tools)
+* [6\. License](#6-license)
 
 <!-- toc! -->
 
@@ -171,11 +172,26 @@ parser you can follow the same steps with replacing `device.js` by either
 13. If these tests did run without any problems then commit your changes
     and issue a pull-request.
 
-## 5\. License
+## 5\. Special Tools
+
+To generate a uniq set of test-vectors from text files containing user-agent strings the tool `uniq.js` together with a previous `sort.js` can be used.
+
+Check `sort.js -h` and `uniq.js -h` for usage.
+
+Typical use:
+
+    # sort the useragents - Mozilla ... gets first
+    ./sort.js -u useragents.txt > u.tmp
+    # the debuginfo needs to be present for `uniq.js` to work
+    ./debuginfo.js
+    ./uniq.js -t device -u u.tmp
+
+## 6\. License
 
 Copyright (c) 2014- commenthol 
 
 Software is released under [MIT][license].
 
 [license]: ./LICENSE
+
 
