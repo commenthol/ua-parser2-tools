@@ -34,7 +34,7 @@ To detect the matching parsing line in the `regexes.yaml`, debug information can
   (Sample-file) List of user-agents which are used as input. Each line shall contain one user-agent string.
 
 * `config.js`<br>
-  Configuration settings to locate the `test_resources` and the `regexes.yaml` file. 
+  Configuration settings to locate the `test_resources` and the `regexes.yaml` file.
 
 
 ## 2\. Files to generate lists and add test cases
@@ -81,13 +81,13 @@ parser you can follow the same steps with replacing `device.js` by either
 `os.js` or `ua.js` .
 
 
-1. Clone (or fork) the `ua-parser2` project within this directory.
+1. Clone (or fork) the `ua-parser2-rules` project within this directory.
 
    ````
-   git clone https://github.com/commenthol/ua-parser2.git
+   git clone https://github.com/commenthol/ua-parser2-rules.git
    ````
 
-   **Note:** If you have forked `ua-parser2` into a different dir adapt the setting `config.ua_parser.dir` in `config.js` accordingly. - TAKE CARE in STEP 12 !
+   **Note:** If you have forked `ua-parser2-rules` into a different folder adapt the setting `config.ua_parser.dir` in `config.js` accordingly. - TAKE CARE in STEP 12 !
 
 2. Add the debug information to the `regexes.yaml` file. For each
    "regex" a debug info in the form "#0001" will be added and counted up.
@@ -181,14 +181,14 @@ Check `sort.js -h` and `uniq.js -h` for usage.
 Typical use:
 
     # sort the useragents - Mozilla ... gets first
-    ./sort.js -u useragents.txt > u.tmp
+    ./bin/sort.js -u useragents.txt > u.tmp
     # the debuginfo needs to be present for `uniq.js` to work
-    ./debuginfo.js
-    ./uniq.js -t device -u u.tmp
+    ./bin/debuginfo.js
+    ./bin/uniq.js -t device -u u.tmp
 
 ## 6\. License
 
-Copyright (c) 2014- commenthol 
+Copyright (c) 2014- commenthol
 
 Software is released under [MIT][license].
 

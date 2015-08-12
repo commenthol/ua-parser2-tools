@@ -24,31 +24,36 @@ cli
 	.option('-r, --tree', 'Write tree')
 	.option('-s, --short', 'Print short output (user-agents only)')
 	.option('-i, --ignore', 'Ignore debug information from `regexes.yaml`')
+	.option('-c, --console', 'write output to console')
 	.parse(process.argv);
 
 (function main(options) {
 	options.out = path.resolve(__dirname, ( options.out || '../report/uniq.csv'));
 
-	if (! options.ua) {
-		console.error('need -u as option');
-		return;
+	if (options.ua) {
+		options.ua = path.resolve(__dirname + '/..', options.ua);
 	}
 	if (! options.type) {
 		console.error('need -t as option');
 		return;
 	}
-	if ( ! /^(ua|os|device)$/.test(options.type) ) {
-		console.error('only -t [ua|os|device] allowed');
+	if ( ! /^(ua|os|device|engine)$/.test(options.type) ) {
+		console.error('only -t [ua|os|engine|device] allowed');
 		return;
+	}
+	if (options.console) {
+		options.out = undefined;
 	}
 
 	filter(options,
-		path.resolve(__dirname + '/..', options.ua),
+		options.ua,
 		options.out,
 		function(err, data){
 			if (options.tree) {
 				fs.writeFileSync(__dirname + '/../report/tree.json', JSON.stringify(data, null, 2));
 			}
-			console.log('writing output to "'+ options.out +'"');
+			if (options.out) {
+				console.log('writing output to "'+ options.out +'"');
+			}
 		});
 })(cli);

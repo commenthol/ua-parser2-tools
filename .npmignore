@@ -1,6 +1,6 @@
-/node_modules
-/resources
-/report
+node_modules
+/test_resources
 /tmp
+/*.tgz
+/npm-debug.log
 /.*
-/*.log
