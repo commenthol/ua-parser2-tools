@@ -68,7 +68,7 @@ function main(add) {
   
   // add debug info
   if (! hasDebugInfo) {
-    data = data.replace(/(^[ \t]*)(- regex:\s*'[^']*'[ \t]*)/mg, function(m, m1, m2) {
+    data = data.replace(/(^[ \t]*)(- regex:\s*['"][^'"]*['"][ \t]*)$/mg, function(m, m1, m2) {
       return m1 + m2 + "\n" + m1 + "  debug: '#" + addZeros(++cnt, 4) + "'";
     });
     console.log('\n    debug info added to regexes.yaml\n');
