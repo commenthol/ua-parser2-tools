@@ -7,7 +7,7 @@
  * otherwise added.
  */
 
-"use strict";
+"use strict"
  
 /**
  * Module dependencies
@@ -20,7 +20,7 @@ var
 /**
  * Module variables
  */
-var regexes = path.normalize(path.join(config.uaParser2.dir, config.uaParser2.regexes));
+var regexes = path.normalize(path.join(config.uaParser2.dir, config.uaParser2.regexes))
 
 /**
  * add leading zeros 
@@ -31,12 +31,12 @@ var regexes = path.normalize(path.join(config.uaParser2.dir, config.uaParser2.re
  *                   leading zeros
  */
 function addZeros(n, length) {
-  var str = '' + n;
-  var z = '00000000';
+  var str = '' + n
+  var z = '00000000'
   if (str.length >= length) {
-    return str;
+    return str
   }
-  return z.substr(0, length - str.length) + str;
+  return z.substr(0, length - str.length) + str
 }
 
 /**
@@ -47,9 +47,9 @@ function addZeros(n, length) {
  * @return {Boolean} true: file changed, false: file remains unchanged
  */
 function main(add) {
-  var data = fs.readFileSync(regexes, 'utf8');
-  var cnt = 0;
-  var hasDebugInfo = false;
+  var data = fs.readFileSync(regexes, 'utf8')
+  var cnt = 0
+  var hasDebugInfo = false
 
   if (/^\s*debug:\s*'[^']*'/m.test(data)) {
     hasDebugInfo = true; 
@@ -57,33 +57,36 @@ function main(add) {
 
   if ((add ===  true && hasDebugInfo === true) || 
       (add === false && hasDebugInfo === false)) {
-    return false;
+    return false
   }
 
   // write a backup - for any cases
-  fs.writeFileSync(regexes + '.bak', data, 'utf8');
+  fs.writeFileSync(regexes + '.bak', data, 'utf8')
   
   // delete all debug lines
-  data = data.replace(/^\s*debug:\s*'[^']*'[ \t]*\n/mg, '');
+  data = data
+    .replace(/^\s*debug:\s*'[^']*'[ \t]*\n/mg, '')
+    .replace(/(\s*)$/g, '') // strip tailing spaces
+    + '\n'
   
   // add debug info
   if (! hasDebugInfo) {
     data = data.replace(/(^[ \t]*)(- regex:\s*['"][^'"]*['"][ \t]*)$/mg, function(m, m1, m2) {
-      return m1 + m2 + "\n" + m1 + "  debug: '#" + addZeros(++cnt, 4) + "'";
-    });
-    console.log('\n    debug info added to regexes.yaml\n');
+      return m1 + m2 + "\n" + m1 + "  debug: '#" + addZeros(++cnt, 4) + "'"
+    })
+    console.log('\n    debug info added to regexes.yaml\n')
   }
   else {
-    console.log('\n    debug info removed from regexes.yaml\n');
+    console.log('\n    debug info removed from regexes.yaml\n')
   }
   
-  fs.writeFileSync(regexes, data, 'utf8');
+  fs.writeFileSync(regexes, data, 'utf8')
   
-  return true;
+  return true
 }
 
-module.exports = main;
+module.exports = main
 
 if (require.main === module) {
-  main();
+  main()
 }
